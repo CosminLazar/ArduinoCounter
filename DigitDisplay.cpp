@@ -2,15 +2,14 @@
 // 
 // 
 
+
 #include "DigitDisplay.h"
 
 
-
 void DigitDisplay::Display(char character)
-{
-	uint8_t index = character - 48;
-	uint8_t valueToDisplay = ConversionTable[index];
-
+{	
+	uint8_t valueToDisplay = Convert(character);
+	
 	if (valueToDisplay & (1 << 6)) {
 		//11 on
 		digitalWrite(11, LOW);
@@ -81,4 +80,22 @@ void DigitDisplay::Display(char character)
 		//5 off
 		digitalWrite(5, HIGH);
 	}
+}
+
+bool DigitDisplay::IsCharacterSupported(char character)
+{
+	if (ConversionTableLength == 0)
+		return false;
+
+	bool isSupported = (FirstSupportedCharacter <= character) && (character <= LastSupportedCharacter);
+	return isSupported;
+}
+
+uint8_t DigitDisplay::Convert(char character)
+{
+	if (!IsCharacterSupported(character))
+		return 0;
+
+	uint8_t index = character - FirstSupportedCharacter;
+	return ConversionTable[index];
 }
