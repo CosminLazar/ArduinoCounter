@@ -84,10 +84,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DigitDisplay.h" />
+    <ClInclude Include="MultiplexedDisplay.h" />
     <ClInclude Include="__vm\.ArduinoCounter.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DigitDisplay.cpp" />
+    <ClCompile Include="MultiplexedDisplay.cpp" />
   </ItemGroup>
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>

@@ -1,3 +1,4 @@
+#include "MultiplexedDisplay.h"
 #include "DigitDisplay.h"
 void setup()
 {
@@ -12,10 +13,10 @@ void setup()
 	pinMode(7, OUTPUT);
 	pinMode(6, OUTPUT);
 	pinMode(5, OUTPUT);
+	pinMode(4, OUTPUT);
 
-
-	digitalWrite(13, HIGH);
-	digitalWrite(12, LOW);
+	//digitalWrite(13, HIGH);
+	//digitalWrite(12, LOW);
 
 
 	digitalWrite(11, HIGH);
@@ -27,42 +28,18 @@ void setup()
 	digitalWrite(5, HIGH);
 }
 
-DigitDisplay display;
+Segments segmentConfig = { 11, 10, 9, 8, 7, 6, 5, 4 };
 
+DigitDisplay display(segmentConfig);
+MultiplexedDisplay mdisplay(segmentConfig);
+bool t = false;
 void loop()
 {
-
-	display.Display('Z');
-
-	//delay(500);
- // /* add main program code here */
-	//display.Display('0');
-
-	//delay(500);
-
-	//display.Display('1');
-
-	//delay(500);
-	//display.Display('2');
-
-	//delay(500);
-	//display.Display('3');
-
-	//delay(500);
-	//display.Display('4');
-
-	//delay(500);
-	//display.Display('5');
-
-	//delay(500);
-	//display.Display('6');
-
-	//delay(500);
-	//display.Display('7');
-
-	//delay(500);
-	//display.Display('8');
-
-	//delay(500);
-	//display.Display('9');
+	if (!t)
+	{
+		String str("123456");
+		mdisplay.Display(str);
+		t = true;
+	}
+	mdisplay.Process();	
 }

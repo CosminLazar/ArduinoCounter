@@ -24,9 +24,15 @@
     <ClInclude Include="DigitDisplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MultiplexedDisplay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DigitDisplay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplexedDisplay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
