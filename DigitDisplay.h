@@ -9,6 +9,19 @@
 #include "WProgram.h"
 #endif
 
+///<summary>Identifies the Arduino digital pins connected to each segment.</summary>
+///<remarks>Use the segment_mapping.gif file in the literature directory for reference</remarks>
+struct Segments {
+	uint8_t A;
+	uint8_t B;
+	uint8_t C;
+	uint8_t D;
+	uint8_t E;
+	uint8_t F;
+	uint8_t G;
+	uint8_t H;
+};
+
 class DigitDisplay {
 private:
 	//Defines the conversion between an ASCII character to a byte representing the segments that need to be lit on the display
@@ -19,6 +32,8 @@ private:
 	static const uint8_t ConversionTableLength = 43;
 	static const uint8_t FirstSupportedCharacter = 48;
 	static const uint8_t LastSupportedCharacter = FirstSupportedCharacter + ConversionTableLength - 1;
+	static const uint8_t SegmentON = LOW;
+	static const uint8_t SegmentOFF = HIGH;
 
 	uint8_t ConversionTable[ConversionTableLength] = {
 		/* [0] - 0		*/ 126,
@@ -65,11 +80,14 @@ private:
 		/* [41] - Y		*/ 59,
 		/* [42] - Z		*/ 109
 	};
+	Segments _segmentSetup;
 public:
+	DigitDisplay(Segments segmentSetup) :_segmentSetup(segmentSetup) {};
 	void Display(char character);
 	bool IsCharacterSupported(char character);
 private:
 	uint8_t Convert(char character);
+	bool IsBitSet(uint8_t bit, uint8_t byte);
 };
 
 #endif
