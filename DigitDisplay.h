@@ -84,6 +84,7 @@ private:
 public:
 	DigitDisplay(Segments segmentSetup) :_segmentSetup(segmentSetup) {};
 	void Display(char character);
+	void Display(char character, bool dpOn);
 	bool IsCharacterSupported(char character);
 private:
 	uint8_t Convert(char character);

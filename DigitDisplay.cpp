@@ -7,8 +7,12 @@
 
 void DigitDisplay::Display(char character)
 {
+	Display(character, false);
+}
+
+void DigitDisplay::Display(char character, bool dpOn) {
 	uint8_t valueToDisplay = Convert(character);
-	
+
 	digitalWrite(_segmentSetup.A, IsBitSet(6, valueToDisplay) ? SegmentON : SegmentOFF);
 	digitalWrite(_segmentSetup.B, IsBitSet(5, valueToDisplay) ? SegmentON : SegmentOFF);
 	digitalWrite(_segmentSetup.C, IsBitSet(4, valueToDisplay) ? SegmentON : SegmentOFF);
@@ -16,8 +20,7 @@ void DigitDisplay::Display(char character)
 	digitalWrite(_segmentSetup.E, IsBitSet(2, valueToDisplay) ? SegmentON : SegmentOFF);
 	digitalWrite(_segmentSetup.F, IsBitSet(1, valueToDisplay) ? SegmentON : SegmentOFF);
 	digitalWrite(_segmentSetup.G, IsBitSet(0, valueToDisplay) ? SegmentON : SegmentOFF);
-
-	//remember about DP
+	digitalWrite(_segmentSetup.H, dpOn ? SegmentON : SegmentOFF);
 }
 
 bool DigitDisplay::IsCharacterSupported(char character)
