@@ -1,5 +1,15 @@
+#include "AutoScrollingDisplay.h"
+#include "DigitDisplayDecorator.h"
 #include "MultiplexedDisplay.h"
 #include "DigitDisplay.h"
+
+
+Segments segmentConfig = { 11, 10, 9, 8, 7, 6, 5, 4 };
+uint8_t digitSelectors[] = { 13, 12 };
+DigitDisplay display(segmentConfig);
+
+AutoScrollingDisplayClass * sdisplay = new AutoScrollingDisplayClass(new MultiplexedDisplay(&display, segmentConfig, digitSelectors, 2), 2);
+
 void setup()
 {
 
@@ -18,7 +28,6 @@ void setup()
 	//digitalWrite(13, HIGH);
 	//digitalWrite(12, LOW);
 
-
 	digitalWrite(11, HIGH);
 	digitalWrite(10, HIGH);
 	digitalWrite(9, HIGH);
@@ -26,20 +35,12 @@ void setup()
 	digitalWrite(7, HIGH);
 	digitalWrite(6, HIGH);
 	digitalWrite(5, HIGH);
+
+	sdisplay->Display("123");
 }
 
-Segments segmentConfig = { 11, 10, 9, 8, 7, 6, 5, 4 };
-
-DigitDisplay display(segmentConfig);
-MultiplexedDisplay mdisplay(segmentConfig);
-bool t = false;
 void loop()
 {
-	if (!t)
-	{
-		String str("123456");
-		mdisplay.Display(str);
-		t = true;
-	}
-	mdisplay.Process();	
+	sdisplay->Process();
+	delay(10);
 }

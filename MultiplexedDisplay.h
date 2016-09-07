@@ -10,12 +10,18 @@
 #endif
 
 #include "DigitDisplay.h"
+#include "DigitDisplayDecorator.h"
 
-class MultiplexedDisplay {
+class MultiplexedDisplay : public DigitDisplayDecoratorClass {
 private:
-	DigitDisplay _digitDisplay;
+	uint8_t* _digitSelectors;
+	uint8_t _digitSelectorsLen;
+	uint8_t _currentDigitIndex = 0;
 public:
-	MultiplexedDisplay(Segments segmentSetup) : _digitDisplay(DigitDisplay(segmentSetup)) {};
+	MultiplexedDisplay(DigitDisplay * decorated, Segments segmentSetup, uint8_t digitSelectors[], uint8_t digitSelectorsLen)
+		: DigitDisplayDecoratorClass(decorated),
+		_digitSelectors(digitSelectors),
+		_digitSelectorsLen(digitSelectorsLen) {};
 	void Display(String text);
 	void Process();
 };

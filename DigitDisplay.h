@@ -82,9 +82,12 @@ private:
 	};
 	Segments _segmentSetup;
 public:
+	DigitDisplay() {};
 	DigitDisplay(Segments segmentSetup) :_segmentSetup(segmentSetup) {};
-	void Display(char character);
-	void Display(char character, bool dpOn);	
+	virtual void Display(String text);
+	virtual void Process();
+protected:
+	virtual void Display(String text, bool dpOn);
 private:
 	bool IsCharacterSupported(char character);
 	uint8_t Convert(char character);

@@ -5,13 +5,17 @@
 
 #include "DigitDisplay.h"
 
-void DigitDisplay::Display(char character)
+void DigitDisplay::Display(String text)
 {
-	Display(character, false);
+	Display(text, false);
 }
 
-void DigitDisplay::Display(char character, bool dpOn) {
-	uint8_t valueToDisplay = Convert(character);
+void DigitDisplay::Process()
+{
+}
+
+void DigitDisplay::Display(String text, bool dpOn) {
+	uint8_t valueToDisplay = Convert(text[0]);
 
 	digitalWrite(_segmentSetup.A, IsBitSet(6, valueToDisplay) ? SegmentON : SegmentOFF);
 	digitalWrite(_segmentSetup.B, IsBitSet(5, valueToDisplay) ? SegmentON : SegmentOFF);
