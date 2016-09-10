@@ -83,7 +83,26 @@ private:
 	Segments _segmentSetup;
 public:
 	DigitDisplay() {};
-	DigitDisplay(Segments segmentSetup) :_segmentSetup(segmentSetup) {};
+	DigitDisplay(Segments segmentSetup) :_segmentSetup(segmentSetup)
+	{
+		pinMode(_segmentSetup.A, OUTPUT);
+		pinMode(_segmentSetup.B, OUTPUT);
+		pinMode(_segmentSetup.C, OUTPUT);
+		pinMode(_segmentSetup.D, OUTPUT);
+		pinMode(_segmentSetup.E, OUTPUT);
+		pinMode(_segmentSetup.F, OUTPUT);
+		pinMode(_segmentSetup.G, OUTPUT);
+		pinMode(_segmentSetup.H, OUTPUT);
+
+		digitalWrite(_segmentSetup.A, HIGH);
+		digitalWrite(_segmentSetup.B, HIGH);
+		digitalWrite(_segmentSetup.C, HIGH);
+		digitalWrite(_segmentSetup.D, HIGH);
+		digitalWrite(_segmentSetup.E, HIGH);
+		digitalWrite(_segmentSetup.F, HIGH);
+		digitalWrite(_segmentSetup.G, HIGH);
+		digitalWrite(_segmentSetup.H, HIGH);
+	};
 	virtual void Display(String text);
 	virtual void Process();
 protected:

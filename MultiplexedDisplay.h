@@ -21,7 +21,13 @@ public:
 	MultiplexedDisplay(DigitDisplay * decorated, Segments segmentSetup, uint8_t digitSelectors[], uint8_t digitSelectorsLen)
 		: DigitDisplayDecoratorClass(decorated),
 		_digitSelectors(digitSelectors),
-		_digitSelectorsLen(digitSelectorsLen) {};
+		_digitSelectorsLen(digitSelectorsLen)
+	{
+		for (size_t i = 0; i < _digitSelectorsLen; i++)
+		{
+			pinMode(_digitSelectors[i], OUTPUT);
+		}
+	};
 	void Display(String text);
 	void Process();
 };
