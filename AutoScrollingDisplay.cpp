@@ -6,12 +6,10 @@ void AutoScrollingDisplayClass::Display(String text)
 }
 
 void AutoScrollingDisplayClass::Process() {
-
-	if ((millis() - lastFrame) > 200)
+	if (TimeForANewFrame())
 	{
 		DrawFrame();
-		lastFrame = millis();
-		lastFrameIndex = (lastFrameIndex + 1) % (_textToDisplay.length() + 2);
+		AfterFrameDraw();
 	}
 
 	DigitDisplayDecoratorClass::Process();
@@ -27,8 +25,8 @@ void AutoScrollingDisplayClass::DrawFrame()
 	{
 		String frameStr = String();
 
-		int leftPadding = _noOfVisibleDigits - lastFrameIndex > 0
-			? _noOfVisibleDigits - lastFrameIndex
+		int leftPadding = _noOfVisibleDigits - _lastFrameIndex > 0
+			? _noOfVisibleDigits - _lastFrameIndex
 			: 0;
 
 		for (size_t i = 0; i < _noOfVisibleDigits; i++)
@@ -39,7 +37,7 @@ void AutoScrollingDisplayClass::DrawFrame()
 			}
 			else
 			{
-				int textIndexer = i + lastFrameIndex - _noOfVisibleDigits;
+				int textIndexer = i + _lastFrameIndex - _noOfVisibleDigits;
 				if (textIndexer < _textToDisplay.length())
 				{
 					frameStr.concat(_textToDisplay[textIndexer]);
@@ -53,4 +51,16 @@ void AutoScrollingDisplayClass::DrawFrame()
 
 		DigitDisplayDecoratorClass::Display(frameStr);
 	}
+}
+
+void AutoScrollingDisplayClass::AfterFrameDraw() 
+{
+	_lastFrameDrawnAt = millis();
+	unsigned int drawWindow = _textToDisplay.length() + _noOfVisibleDigits;
+	_lastFrameIndex = (_lastFrameIndex + 1) % drawWindow;
+}
+
+bool AutoScrollingDisplayClass::TimeForANewFrame()
+{
+	return (millis() - _lastFrameDrawnAt) > _scrollSpeed;
 }

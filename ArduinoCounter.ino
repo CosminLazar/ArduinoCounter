@@ -8,7 +8,7 @@ Segments segmentConfig = { 11, 10, 9, 8, 7, 6, 5, 4 };
 uint8_t digitSelectors[] = { 13, 12 };
 DigitDisplay display(segmentConfig);
 
-AutoScrollingDisplayClass * sdisplay = new AutoScrollingDisplayClass(new MultiplexedDisplay(&display, segmentConfig, digitSelectors, 2), 2);
+AutoScrollingDisplayClass * sdisplay = new AutoScrollingDisplayClass(new MultiplexedDisplay(&display, segmentConfig, digitSelectors, 2), 2, 200);
 
 void setup()
 {
@@ -36,7 +36,9 @@ void setup()
 	digitalWrite(6, HIGH);
 	digitalWrite(5, HIGH);
 
-	sdisplay->Display("123");
+	Serial.begin(9600);
+
+	sdisplay->Display("123456789");
 }
 
 void loop()
