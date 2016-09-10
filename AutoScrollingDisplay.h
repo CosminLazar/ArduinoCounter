@@ -16,7 +16,10 @@ class AutoScrollingDisplayClass : public DigitDisplayDecoratorClass
 {
 private:
 	uint8_t _noOfVisibleDigits;
-
+	const char WhiteSpace = ' ';
+	String _textToDisplay;
+	unsigned long lastFrame = 0;
+	int lastFrameIndex = 0;
 public:
 	AutoScrollingDisplayClass(DigitDisplay * decorated, uint8_t noOfVisibleDigits)
 		: DigitDisplayDecoratorClass(decorated),
@@ -24,6 +27,8 @@ public:
 	{};
 	void Display(String text);
 	void Process();
+private:
+	void DrawFrame();
 };
 
 
