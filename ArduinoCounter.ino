@@ -71,7 +71,7 @@ void SplashScreen()
 	unsigned long start = millis();
 	sdisplay->Display("TRANS4MERS");
 
-	while (millis() - start < 5400)
+	while (millis() - start < 5200)
 	{
 		sdisplay->Process();
 	}
