@@ -22,6 +22,7 @@ void setup()
 	pinMode(3, INPUT_PULLUP);
 	pinMode(2, INPUT_PULLUP);
 
+	SplashScreen();
 	InitializeFromFlash();
 	RefreshDisplay();
 }
@@ -63,4 +64,15 @@ void RefreshDisplay() {
 	char text[3];//we are limited at 256 anyway	
 	sprintf(text, displayFormat.c_str(), String(currentNumber).c_str());
 	sdisplay->Display(String(text));
+}
+
+void SplashScreen()
+{
+	unsigned long start = millis();
+	sdisplay->Display("TRANS4MERS");
+
+	while (millis() - start < 5400)
+	{
+		sdisplay->Process();
+	}
 }
